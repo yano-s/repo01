@@ -9,7 +9,9 @@
 <h1>
 	初めてのOpenShift!
 </h1>
-
+<p>ひゃっはー！</p>
+<p>OpenShift起動確認！</p>
 <P>  The time on the server is ${serverTime}. </P>
+
 </body>
 </html>
