@@ -1,8 +1,16 @@
 package com.example.oshift.controller;
 
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +46,31 @@ public class HomeController {
 
 		model.addAttribute("serverTime",
 				DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss.SSS").format(LocalDateTime.now()));
+		Map<String,String> systemProps = new HashMap<>();
+		for (String key : System.getProperties().stringPropertyNames()) {
+			systemProps.put(key, System.getProperty(key));
+		}
+		model.addAttribute("systemProps",systemProps);
+
+		//アドレス
+		List<InetAddress> addressList = new ArrayList<>();
+		try {
+			Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+			while (interfaces.hasMoreElements()) {
+				NetworkInterface network = interfaces.nextElement();
+		        Enumeration<InetAddress> addresses = network.getInetAddresses();
+		        while(addresses.hasMoreElements()){
+		        	InetAddress address  = addresses.nextElement();
+		        	addressList.add(address);
+		        }
+
+			}
+		} catch (SocketException e) {
+			//無視
+		}
+		model.addAttribute("addressList",addressList);
+
+
 		HttpSession session = request.getSession(true);
 		model.addAttribute("sessionId", session.getId());
 
