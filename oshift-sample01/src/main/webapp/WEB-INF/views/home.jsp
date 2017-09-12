@@ -6,7 +6,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
 <head>
-	<title>Home</title>
+	<title>Sample01</title>
 <style>
 .list{
 border-collapse: collapse;
@@ -24,7 +24,7 @@ width:150px;}
 </head>
 <body>
 <h1>
-	初めてのOpenShift!
+	Sample01(${title})
 </h1>
 <p>OpenShift起動確認！</p>
 <P>  The time on the server is ${serverTime}. </P>
