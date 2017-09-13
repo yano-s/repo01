@@ -19,7 +19,10 @@
 	<li><c:out value="${configuration}"/></li>
 </c:forEach>
 </ul>
-
+<form:form action="${pageContext.request.contextPath}/dl-config" method="POST">
+	<p>$JBOSS_HOME/standalone/configuration/<input type="text" name="fileName"></p>
+	<button type="submit">ダウンロード</button>
+</form:form>
 <h3>eapHomeList</h3>
 <ul>
 <c:forEach var="entry" items="${eapHomeList}" >
