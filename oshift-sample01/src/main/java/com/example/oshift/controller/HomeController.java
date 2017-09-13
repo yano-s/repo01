@@ -1,5 +1,6 @@
 package com.example.oshift.controller;
 
+import java.io.File;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -52,30 +53,29 @@ public class HomeController {
 
 		model.addAttribute("serverTime",
 				DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss.SSS").format(LocalDateTime.now()));
-		Map<String,String> systemProps = new HashMap<>();
+		Map<String, String> systemProps = new HashMap<>();
 		for (String key : System.getProperties().stringPropertyNames()) {
 			systemProps.put(key, System.getProperty(key));
 		}
-		model.addAttribute("systemProps",systemProps);
+		model.addAttribute("systemProps", systemProps);
 
-		//アドレス
+		// アドレス
 		List<InetAddress> addressList = new ArrayList<>();
 		try {
 			Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
 			while (interfaces.hasMoreElements()) {
 				NetworkInterface network = interfaces.nextElement();
-		        Enumeration<InetAddress> addresses = network.getInetAddresses();
-		        while(addresses.hasMoreElements()){
-		        	InetAddress address  = addresses.nextElement();
-		        	addressList.add(address);
-		        }
+				Enumeration<InetAddress> addresses = network.getInetAddresses();
+				while (addresses.hasMoreElements()) {
+					InetAddress address = addresses.nextElement();
+					addressList.add(address);
+				}
 
 			}
 		} catch (SocketException e) {
-			//無視
+			// 無視
 		}
-		model.addAttribute("addressList",addressList);
-
+		model.addAttribute("addressList", addressList);
 
 		HttpSession session = request.getSession(true);
 		model.addAttribute("sessionId", session.getId());
@@ -87,7 +87,7 @@ public class HomeController {
 		}
 
 		model.addAttribute("counter", counter.incrementAndGet());
-		model.addAttribute("title",configBean.getTitle());
+		model.addAttribute("title", configBean.getTitle());
 
 		return "home";
 	}
@@ -98,6 +98,25 @@ public class HomeController {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/testPage", method = RequestMethod.GET)
+	public String testPage(Locale locale, HttpServletRequest request, Model model) {
+		List<String> eapHomeList = new ArrayList<>();
+		File eapHome = new File(System.getenv("JBOSS_HOME"));
+		for (File file : eapHome.listFiles()) {
+			eapHomeList.add(file.getName());
+		}
+		model.addAttribute("eapHomeList", eapHomeList);
+
+		List<String> configurationList = new ArrayList<>();
+		File configuration = new File(eapHome, "standalone/configuration");
+		for (File file : configuration.listFiles()) {
+			configurationList.add(file.getName());
+		}
+		model.addAttribute("configurationList", configurationList);
+
+		return "testPage";
 	}
 
 }
