@@ -1,6 +1,7 @@
 package com.example.oshift.controller;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +29,20 @@ public class TestpageController {
 
 	@RequestMapping(value = "/testPage", method = RequestMethod.GET)
 	public String testPage(Locale locale, HttpServletRequest request, Model model) {
-		System.out.println("open");
+		List<String> eapHomeList = new ArrayList<>();
+		File eapHome = new File(System.getenv("JBOSS_HOME"));
+		for (File file : eapHome.listFiles()) {
+			eapHomeList.add(file.getName());
+		}
+		model.addAttribute("eapHomeList", eapHomeList);
+
+		List<String> configurationList = new ArrayList<>();
+		File configuration = new File(eapHome, "standalone/configuration");
+		for (File file : configuration.listFiles()) {
+			configurationList.add(file.getName());
+		}
+		model.addAttribute("configurationList", configurationList);
+
 		return "testPage";
 	}
 
