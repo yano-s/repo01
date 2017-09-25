@@ -11,6 +11,7 @@
 <body>
 	<h1>内容確認ページ</h1>
 	<h3>configurationList</h3>
+	<p>JBOSS_HOME=<c:out value="${jbossHome}"/></p>
 	<ul>
 		<c:forEach var="configuration" items="${configurationList}">
 			<li><c:out value="${configuration}" /></li>
