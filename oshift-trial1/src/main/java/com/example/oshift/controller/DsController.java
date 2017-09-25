@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 @Controller
 public class DsController {
 	@RequestMapping(value = "/ds", method = RequestMethod.GET)
@@ -30,7 +31,7 @@ public class DsController {
 					try (ResultSet rs = st.executeQuery("select now()")) {
 						rs.next();
 						Timestamp ts = rs.getTimestamp(1);
-						model.addAttribute("prevText", "[SUCCESS]\n"+ts.toString());
+						model.addAttribute("prevText", "[SUCCESS]\n" + ts.toString());
 					}
 				}
 			}
