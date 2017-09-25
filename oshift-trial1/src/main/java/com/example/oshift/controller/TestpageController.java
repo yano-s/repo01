@@ -58,7 +58,8 @@ public class TestpageController {
 		if (file.exists()) {
 			model.addAttribute("prevText", "ファイルがありません");
 		} else if (file.isDirectory()) {
-			model.addAttribute("prevText", "ディレクトリです。");
+			model.addAttribute("prevText", "[DIR]\n"+String.join("\n", file.list()));
+
 		} else {
 			model.addAttribute("prevText", FileUtils.readFileToString(file, "UTF-8"));
 		}
