@@ -57,7 +57,7 @@ public class TestpageController {
 			@RequestParam("filePath") String filePath) throws Exception {
 		// prevText
 		File file = new File(filePath);
-		if (file.exists()) {
+		if (!file.exists()) {
 			model.addAttribute("prevText", "ファイルがありません");
 		} else if (file.isDirectory()) {
 			model.addAttribute("prevText", "[DIR]\n"+String.join("\n", file.list()));
