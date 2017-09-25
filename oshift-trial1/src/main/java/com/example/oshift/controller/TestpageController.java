@@ -34,7 +34,9 @@ public class TestpageController {
 	@RequestMapping(value = "/testPage", method = RequestMethod.GET)
 	public String testPage(Locale locale, HttpServletRequest request, Model model) {
 		List<String> eapHomeList = new ArrayList<>();
-		File eapHome = new File(System.getenv("JBOSS_HOME"));
+		String jbossHome = System.getenv("JBOSS_HOME");
+		File eapHome = new File(jbossHome);
+		model.addAttribute("jbossHome",jbossHome);
 		for (File file : eapHome.listFiles()) {
 			eapHomeList.add(file.getName());
 		}
