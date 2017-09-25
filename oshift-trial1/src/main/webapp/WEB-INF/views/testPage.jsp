@@ -24,7 +24,7 @@
 			<button type="submit">表示</button>
 		</form:form>
 <pre>
-<c:out value="${prevText} }" />
+<c:out value="${prevText}" />
 </pre>
 		<hr>
 <h3>ダウンロード</h3>
