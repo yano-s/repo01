@@ -309,7 +309,7 @@
                 <protocol type="AUTH">
                     <property name="auth_class">org.jgroups.auth.MD5Token</property>
                     <property name="token_hash">SHA</property>
-                    <property name="auth_value">P5wtRNk2</property>
+                    <property name="auth_value">OocYiRTm</property>
                 </protocol>
 
                     <protocol type="pbcast.GMS"/>
@@ -332,7 +332,7 @@
                 <protocol type="AUTH">
                     <property name="auth_class">org.jgroups.auth.MD5Token</property>
                     <property name="token_hash">SHA</property>
-                    <property name="auth_value">P5wtRNk2</property>
+                    <property name="auth_value">OocYiRTm</property>
                 </protocol>
 
                     <protocol type="pbcast.GMS"/>
