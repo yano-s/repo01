@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<bean class="com.example.oshift.config.ConfigBean">
-		<property name="title" value="開発モード"/>
+		<property name="title" value="開発モード ver 1.0"/>
 	</bean>
 
 </beans>
